@@ -5,4 +5,5 @@ urlpatterns = [
     path('post/<int:post_id>', views.post, name='post'),
     path('sobre/', views.sobre, name='sobre'),
     path('contato/', views.contato, name='contato'),
+    path('mensagem/', views.mensagem, name='mensagem'),
 ]
