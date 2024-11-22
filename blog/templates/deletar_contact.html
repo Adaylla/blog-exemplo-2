@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Deletar Contato</h1>
+                    <span class="subheading">Dúvidas? Eu tenho respostas.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+{% block content %}
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>Quer entar em contato? Envie-me uma mensagem e responderei assim que possível!</p>
+                <div class="my-5">
+                    <h1>Tem certeza?</h1>
+                    <form id="contactForm" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger text-uppercase" id="submitButton"  type="submit">Sim</button>
+                        <a class="btn btn-secondary text-uppercase" href="{% url 'mensagem' %}">Não</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
