@@ -31,14 +31,22 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sobre' %}">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'mensagens' %}">Mensagens</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contato' %}">Contato</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'mensagem' %}">Mensagem</a></li>
+                        {% if request.user.is_authenticated %}
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                          <li class="nav-item"><button type="submit" class="nav-link px-lg-3 py-3 py-lg-4">Sair</button></li>
+                        </form>
+                        {% else %}
+                          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Acessar</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-        {% block header %}
         <!-- Page Header-->
+        {% block header %}
         <header class="masthead" style="background-image: url('{{ blog.capa.url }}')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -55,7 +63,7 @@
         </header>
         {% endblock header %}
         <!-- Main Content-->
-        {% block  content %}
+        {% block content %}
         {% endblock content %}
         <!-- Footer-->
         <footer class="border-top">
@@ -72,7 +80,7 @@
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="{{ blog.facebook }}">
+                                <a href="{{ blog.facebook}}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>

@@ -15,15 +15,21 @@
                 </a>
                 <p class="post-meta">
                     Postado por
-                    <a href="#!">{{ post.usuario.username }}</a>
+                    <a href="#!"><!-- -chaves-post.usuario.username-chaves- --></a>
                     em {{ post.data_criacao }}
                 </p>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
             {% endfor %}
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url "cadastrarpost" %}">Adicionar post</a></div>        </div>
+            {% if request.user.is_authenticated and perms.blog.add_post %}
+            <div class="d-flex justify-content-end mb-4">
+                <a class="btn btn-primary text-uppercase" href="{% url 'criar_post' %}">
+                    Criar Post
+                </a>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock content %}

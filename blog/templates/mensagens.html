@@ -9,7 +9,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
                     <h1>Mensagens</h1>
-                    <span class="subheading">Aqui estão todas as mensagens postadas.</span>
+                    <span class="subheading">Mensagens enviadas pelos queridos leitores.</span>
                 </div>
             </div>
         </div>
@@ -23,8 +23,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for mensagem in mensagem %}
-            <div class="post-preview">
+            {% for mensagem in mensagens %}
+            {% if mensagem.nome %}
                 <a href="{% url 'index' %}">
                     <h2 class="post-title">{{ mensagem.nome }}</h2>
                     <h3 class="post-subtitle">{{ mensagem.mensagem }}</h3>
@@ -32,22 +32,24 @@
                 <p class="post-meta">
                     Postado por
                     <a href="#!">{{ mensagem.email }}</a>
-                    {% if post.mensagem %}
+                    {% if mensagem.cidade %}
                     em {{ mensagem.cidade }}
                     {% endif %}
                 </p>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'deletar_mensagem' mensagem.id %}">
-                <button class="btn btn-danger btn-sm">Deletar</button>
+                    <button class="btn btn-danger btn-sm">Deletar</button>
                 </a>
                 <a href="{% url 'editar_mensagem' mensagem.id %}">
-                <button class="btn btn-warning btn-sm">Editar</button>
+                    <button class="btn btn-warning btn-sm">Editar</button>
                 </a>
-            </div>
+                {% endif %}
             <!-- Divider-->
             <hr class="my-4" />
+            {% endif %}
             {% endfor %}
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" type="submit" href="#!">Older Posts →</a></div>
         </div>
     </div>
 </div>

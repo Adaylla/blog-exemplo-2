@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
-
+{% load static crispy_forms_tags %}
 {% block header %}
 <!-- Page Header-->
 <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
@@ -8,8 +7,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Deletar Contato</h1>
-                    <span class="subheading">Dúvidas? Eu tenho respostas.</span>
+                    <h1>Criar Post</h1>
+                    <span class="subheading">Posts ruins serão punidos severamente.</span>
                 </div>
             </div>
         </div>
@@ -23,13 +22,11 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>Quer entar em contato? Envie-me uma mensagem e responderei assim que possível!</p>
                 <div class="my-5">
-                    <h1>Tem certeza?</h1>
-                    <form id="contactForm" method="POST">
+                    <form id="contactForm" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <button class="btn btn-danger text-uppercase" id="submitButton"  type="submit">Sim</button>
-                        <a class="btn btn-secondary text-uppercase" href="{% url 'mensagem' %}">Não</a>
+                        {{ form | crispy }}
+                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
